@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+
+<div id="app">
+  {{ message }}
+{{ items }}
+  <ul>
+    <li v-for="(item, index) in items" draggable="true" @dragstart="dragstart(item, $event)" @dragend="dragend" @dragenter="dragenter(item)">
+        {{ index }} {{ item.name }}
+    </li>
+  </ul>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    items: {
+        1: {
+            id: 1,
+            name: 'moge',
+        },
+        2: {
+            id: 1,
+            name: 'aho',
+        },
+        3: {
+            id: 1,
+            name: 'hoge',
+        },
+    },
+  },
+  methods: {
+    dragstart (item,e) {
+      // this.draggingItem = item
+      e.dataTransfer.dropEffect = "move"
+      console.log('start');
+    },
+    dragend (e) {
+      // e.target.style.opacity = 1;
+      console.log('end');
+    },
+    dragenter (item) {
+      // const tempIndex = item.index;
+      // item.index = this.draggingItem.index
+      // this.draggingItem.index = tempIndex
+    }
+  }
+})
+Vue.config.devtools = true
+</script>
+</body>
+</html>
